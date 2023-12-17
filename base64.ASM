@@ -6,9 +6,9 @@ section         '.text' code readable executable
  
   start:
        ; call    [GetConsoleCP]
-        push    0x4e3                      ;ANSI-1251
+        push    0x4e3                      ;Windows-1251  UTF-8=0xFDE9
         call    [SetConsoleCP]
-        push    0x4e3                      ;ANSI-1251
+        push    0x4e3                      ;Windows-1251  UTF-8=0xFDE9
         call    [SetConsoleOutputCP]
        ; call    [GetConsoleOutputCP]
        ; call    [GetConsoleCP]
