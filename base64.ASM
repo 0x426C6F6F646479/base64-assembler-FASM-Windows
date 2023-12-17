@@ -147,35 +147,38 @@ section         '.text' code readable executable
         mov    byte [edi],0x3d       ;stop_encryption
 
 write_to_file:                       ;if you need out in file
-        ; pop    eax
-        ; push   0x0
-        ; push   0x80000000
-        ; push   0x2
-        ; push   0x0
-        ; push   0x0
-        ; push   0x10000000
-        ; push   file_out
-        ; call   [CreateFileA]
-        ; xchg   ebx,eax
-        ; sub    edi,(data_out-2)
+       ;  pop    eax
+       ;  push   0x0
+       ;  push   0x80000000
+       ;  push   0x2
+       ;  push   0x0
+       ;  push   0x0
+       ;  push   0x10000000
+       ;  push   file_out
+       ;  call   [CreateFileA]
+       ;  xchg   ebx,eax
+       ;  sub    edi,(data_out-2)
 
-        ; push   0x0
-        ; push   0x0
-        ; push   edi
-        ; push   data_out
-        ; push   ebx
-        ; call   [WriteFile]
+       ;  push   0x0
+       ;  push   0x0
+       ;  push   edi
+       ;  push   data_out
+       ;  push   ebx
+       ;  call   [WriteFile]
 
-        ; push   ebx
-        ; call   [CloseHandle]
-        pop    ebx
-        pop    eax
+       ;  push   ebx
+       ;  call   [CloseHandle]
+        sub    edi,(data_out-2)       ;delete this string if you need to create file
+        pop    eax                    ;and this one
+
+        pop    ebx                    ;hsndle for ReadConsoleA
+        pop    eax                    ;handle for WriteConsoleA
         push   eax
-        mov    ecx,data_out
+        mov    ecx,data_out           ;buffer
         add    edi,data_out
-        mov    dword [edi],0x0d0a
+        mov    dword [edi],0x0d0a     ;\r\n
         sub    edi,data_out-2
-        mov    edx,edi
+        mov    edx,edi                ;how much bytes to write
         jmp    repeats_1
 
   exit_programm:
